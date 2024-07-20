@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.nk.blog.dto.WebResponse;
 import com.nk.blog.exception.BadRequestException;
+import com.nk.blog.exception.CustomDataIntegrityViolationException;
 import com.nk.blog.exception.DataConflictException;
 import com.nk.blog.exception.DuplicateTransactionException;
 import com.nk.blog.exception.ForbiddenException;
@@ -114,6 +115,18 @@ public class TaskControllerAdvice {
         WebResponse<Object> response = new WebResponse<>();
         response.setMessage(ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+     /**
+     * Response for any data conflict.
+     */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CustomDataIntegrityViolationException.class)
+    @ResponseBody
+    public ResponseEntity<WebResponse<Object>> handleDataIntegrityViolationException(CustomDataIntegrityViolationException ex) {
+        WebResponse<Object> response = new WebResponse<>();
+        response.setMessage(ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
    
 }
