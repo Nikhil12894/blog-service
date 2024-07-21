@@ -32,7 +32,7 @@ public interface BlogPostService {
 - [x] ~~Expose the blog management through a RestAPI.~~
 - [x] ~~Integrate Swagger for api documentation.~~
 - [x] ~~Integrate flyway for db migration.~~
-- [ ] Write Unittest with expectation of **100% code coverage** for services and apis attest.
+- [x] ~~Write Unittest with expectation of **100% code coverage** for services and apis attest.~~
 - [ ] Integrate vault for secrete management.
 - [ ] Write Github Action pipeline for automated Docker Image Build and generating kubernetes deployment yml file.
 - [ ] Configure the app into ArgoCD for kubernetes deployment.
