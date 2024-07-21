@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nk.blog.constants.CommonsConstants;
+import com.nk.blog.constants.PostConstents;
 import com.nk.blog.dto.BlogPostDTO;
 import com.nk.blog.dto.BlogPostListDTO;
 import com.nk.blog.dto.BlogPostRequest;
@@ -42,16 +42,16 @@ public class BlogPostController {
     }
 
     @Operation(summary = "get all blog posts", description = "get all blog posts", tags = { "Blog Post" })
-    @Parameter(name = CommonsConstants.PAGE, description = "page number", in = ParameterIn.QUERY)
-    @Parameter(name = CommonsConstants.PAGE_SIZE, description = "number of elements per page", in = ParameterIn.QUERY)
-    @Parameter(name = CommonsConstants.SORT_ORDER, description = "Order to sort in", in = ParameterIn.QUERY, example = CommonsConstants.DEFAULT_SORT_ORDER)
-    @Parameter(name = CommonsConstants.SORT_BY, description = "value to sort by", in = ParameterIn.QUERY, example = CommonsConstants.DEFAULT_SORT_CREATED)
+    @Parameter(name = PostConstents.PAGE, description = "page number", in = ParameterIn.QUERY)
+    @Parameter(name = PostConstents.PAGE_SIZE, description = "number of elements per page", in = ParameterIn.QUERY)
+    @Parameter(name = PostConstents.SORT_ORDER, description = "Order to sort in", in = ParameterIn.QUERY, example = PostConstents.DEFAULT_SORT_ORDER)
+    @Parameter(name = PostConstents.SORT_BY, description = "value to sort by", in = ParameterIn.QUERY, example = PostConstents.DEFAULT_SORT_CREATED)
     @GetMapping
     public ResponseEntity<WebResponse<BlogPostListDTO>> getAllBlogs(
-            @RequestParam(value = CommonsConstants.PAGE, required = false) Integer page,
-            @RequestParam(value = CommonsConstants.PAGE_SIZE, required = false) Integer pageSize,
-            @RequestParam(value = CommonsConstants.SORT_ORDER, defaultValue = CommonsConstants.DEFAULT_SORT_ORDER) SortOrder sort,
-            @RequestParam(value = CommonsConstants.SORT_BY, defaultValue = CommonsConstants.DEFAULT_SORT_CREATED ) BlogPostShortBy sortBy
+            @RequestParam(value = PostConstents.PAGE, required = false) Integer page,
+            @RequestParam(value = PostConstents.PAGE_SIZE, required = false) Integer pageSize,
+            @RequestParam(value = PostConstents.SORT_ORDER, defaultValue = PostConstents.DEFAULT_SORT_ORDER) SortOrder sort,
+            @RequestParam(value = PostConstents.SORT_BY, defaultValue = PostConstents.DEFAULT_SORT_CREATED ) BlogPostShortBy sortBy
     ) {
         BlogPostListDTO blogs = blogService.getAllBlogs(page, pageSize, sort, sortBy);
         WebResponse<BlogPostListDTO> response = WebResponse.<BlogPostListDTO>builder().data(blogs).build();
@@ -60,16 +60,16 @@ public class BlogPostController {
 
     
     @Operation(summary = "get all blog posts for current user", description = "get all blog posts for current user", tags = { "Blog Post" })
-    @Parameter(name = CommonsConstants.PAGE, description = "page number", in = ParameterIn.QUERY)
-    @Parameter(name = CommonsConstants.PAGE_SIZE, description = "number of elements per page", in = ParameterIn.QUERY)
-    @Parameter(name = CommonsConstants.SORT_ORDER, description = "Order to sort in", in = ParameterIn.QUERY, example = CommonsConstants.DEFAULT_SORT_ORDER)
-    @Parameter(name = CommonsConstants.SORT_BY, description = "value to sort by", in = ParameterIn.QUERY, example = CommonsConstants.DEFAULT_SORT_CREATED)
+    @Parameter(name = PostConstents.PAGE, description = "page number", in = ParameterIn.QUERY)
+    @Parameter(name = PostConstents.PAGE_SIZE, description = "number of elements per page", in = ParameterIn.QUERY)
+    @Parameter(name = PostConstents.SORT_ORDER, description = "Order to sort in", in = ParameterIn.QUERY, example = PostConstents.DEFAULT_SORT_ORDER)
+    @Parameter(name = PostConstents.SORT_BY, description = "value to sort by", in = ParameterIn.QUERY, example = PostConstents.DEFAULT_SORT_CREATED)
     @GetMapping("/user")
     public ResponseEntity<WebResponse<BlogPostListDTO>> getAllBlogsCurrentUser(
-            @RequestParam(value = CommonsConstants.PAGE, required = false) Integer page,
-            @RequestParam(value = CommonsConstants.PAGE_SIZE, required = false) Integer pageSize,
-            @RequestParam(value = CommonsConstants.SORT_ORDER, defaultValue = CommonsConstants.DEFAULT_SORT_ORDER) SortOrder sort,
-            @RequestParam(value = CommonsConstants.SORT_BY, defaultValue = CommonsConstants.DEFAULT_SORT_CREATED ) BlogPostShortBy sortBy
+            @RequestParam(value = PostConstents.PAGE, required = false) Integer page,
+            @RequestParam(value = PostConstents.PAGE_SIZE, required = false) Integer pageSize,
+            @RequestParam(value = PostConstents.SORT_ORDER, defaultValue = PostConstents.DEFAULT_SORT_ORDER) SortOrder sort,
+            @RequestParam(value = PostConstents.SORT_BY, defaultValue = PostConstents.DEFAULT_SORT_CREATED ) BlogPostShortBy sortBy
     ) {
         BlogPostListDTO blogs = blogService.getAllBlogsCurrentUser(page, pageSize, sort, sortBy);
         WebResponse<BlogPostListDTO> response = WebResponse.<BlogPostListDTO>builder().data(blogs).build();

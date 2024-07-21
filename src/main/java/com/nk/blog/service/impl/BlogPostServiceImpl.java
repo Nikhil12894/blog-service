@@ -109,7 +109,7 @@ public class BlogPostServiceImpl implements BlogPostService {
     } catch (BadRequestException e) {
       throw e;
     } catch (Exception e) {
-      log.error("Exception occurred while getting posts. {}", e);
+      log.error("Exception occurred while getting posts. {}", e.getMessage());
       throw new InternalServerException(
           "Exception occurred while getting posts.");
     }
@@ -164,7 +164,7 @@ public class BlogPostServiceImpl implements BlogPostService {
    * @param sort     the sort order of the results
    * @param sortBy   the field to sort the results by
    * @return a DTO containing the list of blog posts
-   *         +
+   *
    */
   @Override
   public BlogPostListDTO getAllBlogs(
@@ -220,26 +220,27 @@ public class BlogPostServiceImpl implements BlogPostService {
 
   @Override
   public BlogPostDTO updateBlog(Long id, BlogPostRequest blog) {
-    try{
-    Optional<BlogPost> blogOptional = blogPostRepo.findById(id);
-    if (!blogOptional.isPresent()) {
-      throw new NotFoundException(
-          "Blog Post not found may be unpublished id: " + id);
-    }
-    BlogPost blogPost = blogOptional.get();
-    BlogUtils.setAuditField(blogPost);
-    blogPost.setId(id);
-    blogPost.setTitle(blog.getTitle());
-    blogPost.setDescription(blog.getDescription());
-    blogPost.setContent(blog.getContent());
-    blogPost.setImageUrl(blog.getImageUrl());
-    blogPost.setStatus(blog.getStatus());
-    BlogUtils.setAuditField(blogPost);
-    blogPostRepo.save(blogPost);
-    return BlogUtils.blogPostToDTO(blogPost);
+    try {
+      Optional<BlogPost> blogOptional = blogPostRepo.findById(id);
+      if (!blogOptional.isPresent()) {
+        throw new NotFoundException(
+            "Blog Post not found may be unpublished id: " + id);
+      }
+      BlogPost blogPost = blogOptional.get();
+      BlogUtils.setAuditField(blogPost);
+      blogPost.setId(id);
+      blogPost.setTitle(blog.getTitle());
+      blogPost.setDescription(blog.getDescription());
+      blogPost.setContent(blog.getContent());
+      blogPost.setImageUrl(blog.getImageUrl());
+      blogPost.setStatus(blog.getStatus());
+      BlogUtils.setAuditField(blogPost);
+      blogPostRepo.save(blogPost);
+      return BlogUtils.blogPostToDTO(blogPost);
     } catch (DataIntegrityViolationException e) {
       log.error("Data integrity violation while updating blog. {}", e.getMessage());
-      throw new CustomDataIntegrityViolationException("Failed to Update blog due to data integrity violation: " + e.getMessage());
+      throw new CustomDataIntegrityViolationException(
+          "Failed to Update blog due to data integrity violation: " + e.getMessage());
     }
   }
 

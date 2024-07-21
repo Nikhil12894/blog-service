@@ -1,8 +1,8 @@
 package com.nk.blog.constants;
 
-public abstract class CommonsConstants {
+public abstract class PostConstents {
 
-	private CommonsConstants() {}
+	private PostConstents() {}
 	
 	public static final Long SYSTEM_USER = 0L;
 

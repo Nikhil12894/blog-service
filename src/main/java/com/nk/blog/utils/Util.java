@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import com.nk.blog.constants.CommonsConstants;
+import com.nk.blog.constants.PostConstents;
 import com.nk.blog.enums.SortOrder;
 import com.nk.blog.exception.BadRequestException;
 
@@ -39,7 +39,7 @@ public abstract class Util {
         if (null == sortBy) {
             throw new BadRequestException("Invalid sortBy parameter: null. Must be a valid field name.");
         }
-        if (sort.equals(CommonsConstants.NO_SORT) && sortBy.equals(CommonsConstants.NO_SORT)) {
+        if (sort.equals(PostConstents.NO_SORT) && sortBy.equals(PostConstents.NO_SORT)) {
             return PageRequest.of(page - 1, pageSize);
         } else if (sort.equals(SortOrder.DESC.name())) {
             return PageRequest.of(page - 1, pageSize, Sort.by(sortBy).descending());
@@ -50,8 +50,8 @@ public abstract class Util {
 
     public static PagePageSizeRecord getResult(Integer page, Integer pageSize) {
         if (page == null || pageSize == null) {
-            page = CommonsConstants.DEFAULT_PAGE;
-            pageSize = CommonsConstants.DEFAULT_PAGE_SIZE;
+            page = PostConstents.DEFAULT_PAGE;
+            pageSize = PostConstents.DEFAULT_PAGE_SIZE;
         }
         return new PagePageSizeRecord(page, pageSize);
     }

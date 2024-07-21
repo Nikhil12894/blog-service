@@ -2,7 +2,7 @@ package com.nk.blog.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.nk.blog.constants.CommonsConstants;
+import com.nk.blog.constants.PostConstents;
 import com.nk.blog.enums.BlogStatus;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -66,9 +66,9 @@ public class BlogPostRequest {
   @Schema(
     requiredMode = Schema.RequiredMode.NOT_REQUIRED,
     description = "Status of the blog post",
-    allowableValues = CommonsConstants.ALLOWED_BLOG_STATUS,
+    allowableValues = PostConstents.ALLOWED_BLOG_STATUS,
     example = "DRAFT",
-    defaultValue = CommonsConstants.DEFAULT_BLOG_STATUS
+    defaultValue = PostConstents.DEFAULT_BLOG_STATUS
   )
   private BlogStatus status;
 }

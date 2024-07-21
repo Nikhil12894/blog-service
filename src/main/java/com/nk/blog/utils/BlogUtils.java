@@ -3,8 +3,8 @@ package com.nk.blog.utils;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.nk.blog.constants.CommonsConstants;
 import com.nk.blog.constants.DateConstants;
+import com.nk.blog.constants.PostConstents;
 import com.nk.blog.dto.BlogPostDTO;
 import com.nk.blog.dto.BlogPostRequest;
 import com.nk.blog.enums.BlogStatus;
@@ -26,6 +26,8 @@ public interface BlogUtils {
         .imageUrl(blogPost.getImageUrl())
         .createdBy(blogPost.getCreatedBy())
         .createdAt(blogPost.getCreatedAt())
+        .lastUpdatedBy(blogPost.getLastUpdatedBy())
+        .lastUpdatedAt(blogPost.getLastUpdatedAt())
         .build();
     }
 
@@ -61,16 +63,15 @@ public interface BlogUtils {
         if(blogPost.getId() == null) {
             blogPost.setCreatedBy(getCurrentUserId());
             blogPost.setCreatedAt(LocalDateTime.now(DateConstants.DEFAULT_ZONEID));
-        }else{
+        }
             blogPost.setLastUpdatedBy(getCurrentUserId());
             blogPost.setLastUpdatedAt(LocalDateTime.now(DateConstants.DEFAULT_ZONEID));
-        }
     }
 
     public static long getCurrentUserId() {
         // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         // return authentication.getName();
 
-        return CommonsConstants.SYSTEM_USER;
+        return PostConstents.SYSTEM_USER;
     }
 }
